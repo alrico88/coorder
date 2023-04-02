@@ -23,6 +23,10 @@ function InputCard(props: IInputCardProps) {
   const latitude = useSignal('');
   const longitude = useSignal('');
 
+  const showClear = useComputed(
+    () => longitude.value !== '' || latitude.value !== '',
+  );
+
   const latInputId = `${props.inputPrefix}_latitude`;
   const lonInputId = `${props.inputPrefix}_longitude`;
 
@@ -69,7 +73,7 @@ function InputCard(props: IInputCardProps) {
 
   return (
     <div class="col">
-      <h2 class="mb-0 py-4">{props.title}</h2>
+      <div class="mb-0 py-4 lead fw-bold">{props.title}</div>
       <div class="card mb-4">
         <div class="card-body">
           <h5 class="card-title">{props.inputTitle}:</h5>
@@ -121,13 +125,15 @@ function InputCard(props: IInputCardProps) {
                 >
                   Locate me
                 </button>
-                <button
-                  class="btn btn-link text-danger p-0"
-                  type="button"
-                  onClick={clearInputs}
-                >
-                  Clear
-                </button>
+                {showClear.value && (
+                  <button
+                    class="btn btn-link text-danger p-0"
+                    type="button"
+                    onClick={clearInputs}
+                  >
+                    Clear
+                  </button>
+                )}
               </div>
               <div>
                 <button
@@ -140,12 +146,10 @@ function InputCard(props: IInputCardProps) {
               </div>
             </div>
           </form>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
+          <hr />
           <h5 class="card-title">{props.resultTitle}</h5>
           <input
+            id={`${props.inputPrefix}_result`}
             type="text"
             class="form-control"
             readOnly
