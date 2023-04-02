@@ -21,6 +21,7 @@ export default function DecimalToSexagesimal() {
           longitude: position.coords.longitude.toString(),
         };
       }}
+      inputPrefix="decimalToSexagesimal"
     />
   );
 }

@@ -31,6 +31,7 @@ export default function SexagesimalToDecimal() {
             ),
           };
         }}
+        inputPrefix="sexagesimalToDecimal"
       />
     </>
   );

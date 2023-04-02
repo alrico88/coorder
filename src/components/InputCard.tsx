@@ -16,11 +16,15 @@ interface IInputCardProps {
     latitude: string;
     longitude: string;
   };
+  inputPrefix: string;
 }
 
 function InputCard(props: IInputCardProps) {
   const latitude = useSignal('');
   const longitude = useSignal('');
+
+  const latInputId = `${props.inputPrefix}_latitude`;
+  const lonInputId = `${props.inputPrefix}_longitude`;
 
   function clearInputs() {
     latitude.value = '';
@@ -79,8 +83,11 @@ function InputCard(props: IInputCardProps) {
             <div class="vstack gap-2">
               <div class="row row-cols-md-2 row-cols-1 g-2">
                 <div class="col">
-                  <label class="form-label">Latitude</label>
+                  <label class="form-label" for={latInputId}>
+                    Latitude
+                  </label>
                   <input
+                    id={latInputId}
                     type="text"
                     class="form-control"
                     value={latitude.value}
@@ -91,8 +98,11 @@ function InputCard(props: IInputCardProps) {
                   />
                 </div>
                 <div class="col">
-                  <label class="form-label">Longitude</label>
+                  <label class="form-label" for={lonInputId}>
+                    Longitude
+                  </label>
                   <input
+                    id={lonInputId}
                     type="text"
                     class="form-control"
                     value={longitude.value}
