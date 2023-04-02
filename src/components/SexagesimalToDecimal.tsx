@@ -12,8 +12,8 @@ export default function SexagesimalToDecimal() {
         inputTitle="Sexagesimal coordinates"
         btnText="Convert to decimal"
         placeholders={{
-          latitude: "N 40º 21' 18''",
-          longitude: "W 3º 24' 10''",
+          latitude: "40º 21' 18'' N",
+          longitude: "3º 24' 10'' W",
         }}
         resultTitle="Decimal coordinates: [latitude, longitude]"
         converter={(latitude, longitude) => {

@@ -17,12 +17,7 @@ export function convertDecimalToSexagesimal(
   val: number | string,
   type: 'lat' | 'lon',
 ): string {
-  const { whole, minutes, seconds, dir } = sexagesimal.coordToDMS(
-    Number(val),
-    type,
-  );
-
-  return `${dir} ${whole}º ${minutes}' ${seconds}''`;
+  return sexagesimal.format(Number(val), type);
 }
 
 export function convertDecimalLatLonToSexagesimalLatLon(
