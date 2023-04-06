@@ -1,9 +1,17 @@
+import { signal } from '@preact/signals';
 import DecimalToSexagesimal from './components/DecimalToSexagesimal';
 import SexagesimalToDecimal from './components/SexagesimalToDecimal';
+import PreviewMap from './components/PreviewMap';
+
+const mapData = signal<[number, number] | null>(null);
 
 export function App() {
   const personalLink = 'https://alrico.es';
   const repoLink = 'https://github.com/alrico88/coorder';
+
+  function handleMapUpdate(position: [number, number]) {
+    mapData.value = position;
+  }
 
   return (
     <div class="d-flex flex-column h-100">
@@ -18,11 +26,12 @@ export function App() {
           </div>
         </div>
         <div class="container">
-          <div class="row row-cols-md-2 row-cols-1 pb-4">
-            <SexagesimalToDecimal />
-            <DecimalToSexagesimal />
+          <div class="row row-cols-md-2 row-cols-1 pb-2">
+            <SexagesimalToDecimal onShowInMap={handleMapUpdate} />
+            <DecimalToSexagesimal onShowInMap={handleMapUpdate} />
           </div>
         </div>
+        {mapData.value && <PreviewMap coord={mapData.value} />}
       </main>
       <footer class="mt-auto py-3 bg-light text-center">
         <div>

@@ -1,10 +1,12 @@
 import {
+  convertSexagesimalToDecimal,
   convertDecimalToSexagesimal,
   convertSexagesimalLatLonToDecimalLatLon,
 } from '../helpers/coords';
+import { IInputCardProps } from '../interfaces/map';
 import InputCard from './InputCard';
 
-export default function SexagesimalToDecimal() {
+export default function SexagesimalToDecimal(props: IInputCardProps) {
   return (
     <>
       <InputCard
@@ -17,6 +19,11 @@ export default function SexagesimalToDecimal() {
         }}
         resultTitle="Decimal coordinates: [latitude, longitude]"
         converter={(latitude, longitude) => {
+          props.onShowInMap([
+            convertSexagesimalToDecimal(latitude),
+            convertSexagesimalToDecimal(longitude),
+          ]);
+
           return convertSexagesimalLatLonToDecimalLatLon(latitude, longitude);
         }}
         locationHandler={(position) => {
